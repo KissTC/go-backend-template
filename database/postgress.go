@@ -6,6 +6,7 @@ import (
 	"log"
 
 	"github.com/kisstc/go-backend-template/models"
+	_ "github.com/lib/pq"
 )
 
 // este archivo implementará el repository
@@ -27,7 +28,7 @@ func (repo *PostgressRepository) InsertUser(ctx context.Context, user *models.Us
 	return err
 }
 
-func (repo *PostgressRepository) GetUserById(ctx context.Context, id int64) (*models.User, error) {
+func (repo *PostgressRepository) GetUserById(ctx context.Context, id string) (*models.User, error) {
 	rows, err := repo.db.QueryContext(ctx, "SELECT id, email FROM users WHERE id = $1", id)
 	defer func() {
 		err = rows.Close()

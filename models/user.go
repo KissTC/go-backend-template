@@ -5,7 +5,7 @@ package models
 
 // modelo de usuario a nivel de Go (se tiene que ver a nivel de go, patron de diseño, bd, etc)
 type User struct {
-	Id       int64  `json:"id"`
+	Id       string `json:"id"`
 	Email    string `json:"email"`
 	Password string `json:"password"`
 }
