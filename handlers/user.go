@@ -23,6 +23,7 @@ type SignUpResponse struct {
 func SignUpHandler(s server.Server) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var request = SignUpRequest{}
+		// se rellena de informacion el struct aquí
 		err := json.NewDecoder(r.Body).Decode(&request)
 		if err != nil {
 			// se envia codigo 400
