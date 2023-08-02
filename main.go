@@ -39,5 +39,8 @@ func main() {
 
 // funcion bind para start server
 func BindRoutes(s server.Server, r *mux.Router) {
-	r.HandleFunc("/", handlers.HomeHandler(s)).Methods(http.MethodGet)
+	// .Methods() asignamos el metodo http que usará
+	r.HandleFunc("/", handlers.HomeHandler(s)).Methods(http.MethodGet)          //usará GET
+	r.HandleFunc("/signup", handlers.SignUpHandler(s)).Methods(http.MethodPost) // usara POST
+
 }

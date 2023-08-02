@@ -16,7 +16,7 @@ type PostgressRepository struct {
 
 // url de conexion
 func NewPostgressRepository(url string) (*PostgressRepository, error) {
-	db, err := sql.Open("postgress", url)
+	db, err := sql.Open("postgres", url)
 	if err != nil {
 		return nil, err
 	}
@@ -24,7 +24,7 @@ func NewPostgressRepository(url string) (*PostgressRepository, error) {
 }
 
 func (repo *PostgressRepository) InsertUser(ctx context.Context, user *models.User) error {
-	_, err := repo.db.ExecContext(ctx, "INSERT INTO users(email, password) VALUES ($1, $2)", user.Email, user.Password)
+	_, err := repo.db.ExecContext(ctx, "INSERT INTO users(id, email, password) VALUES ($1, $2, $3)", user.Id, user.Email, user.Password)
 	return err
 }
 
