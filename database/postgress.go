@@ -52,7 +52,7 @@ func (repo *PostgressRepository) GetUserById(ctx context.Context, id string) (*m
 }
 
 func (repo *PostgressRepository) GetUserByEmail(ctx context.Context, email string) (*models.User, error) {
-	rows, err := repo.db.QueryContext(ctx, "SELECT id, email, password FROM users WHERE id = $1", email)
+	rows, err := repo.db.QueryContext(ctx, "SELECT id, email, password FROM users WHERE email = $1", email)
 	defer func() {
 		err = rows.Close()
 		if err != nil {
@@ -62,7 +62,7 @@ func (repo *PostgressRepository) GetUserByEmail(ctx context.Context, email strin
 
 	var user = models.User{}
 	for rows.Next() {
-		if err = rows.Scan(&user.Id, &user.Email); err == nil {
+		if err = rows.Scan(&user.Id, &user.Email, &user.Password); err == nil {
 			return &user, nil
 		}
 	}
